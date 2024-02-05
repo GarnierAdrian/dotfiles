@@ -23,4 +23,4 @@ $ stow .
 
 ## Additional Resources
 
-A good base guide on how to start using stow can be found on [Deram of Autonomy's](https://youtu.be/y6XCebnB9gs?si=8kJ7r6yaVlHMpX6S) YouTube channel. 
+A good base guide on how to start using stow can be found on [Derams of Autonomy's](https://youtu.be/y6XCebnB9gs?si=8kJ7r6yaVlHMpX6S) YouTube channel. 
