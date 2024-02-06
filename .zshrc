@@ -13,6 +13,8 @@ compinit
 # End of lines added by compinstall
 
 
+
+# Begninig of prompt definition
 autoload -Uz vcs_info
 precmd() { vcs_info }
 
@@ -20,3 +22,18 @@ zstyle ':vcs_info:git:*' formats '%b '
 
 setopt PROMPT_SUBST
 PROMPT='%F{green}%n@%m%f %F{blue}%1~%f %F{red}${vcs_info_msg_0_}%f$ '
+# End of prompt definition
+
+
+# Imported from bash
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Created by `pipx` on 2023-10-28 11:57:33
+export PATH="$PATH:/home/agarnier/.local/bin"
+
+export PATH=$PATH:/usr/local/go/bin
+
+# Aliases
+alias yt-playlist='yt-dlp --embed-metadata --embed-subs --embed-thumbnail --merge-output-format mkv -o "%(playlist_title)s/%(playlist_index)s-%(playlist_title)s.%(ext)s" '
