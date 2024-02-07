@@ -19,12 +19,22 @@ function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1] /p'
 }
 
+function parse_git_status() {
+    COLOR_GIT=$'%F{blue}'
+    if [[ -n $(git status -s) ]]; then
+        COLOR_GIT=$'%F{red}'
+    else
+        COLOR_GIT=$'%F{green}'
+    fi
+}
+
 COLOR_DEF=$'%f'
-COLOR_USR=$'%F{blue}'
-COLOR_DIR=$'%F{green}'
-COLOR_GIT=$'%F{red}'
+COLOR_USR=$'%F{magenta}'
+COLOR_DIR=$'%F{yellow}'
+#COLOR_GIT=$'%F{blue}'
+parse_git_status
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF}$ '
+export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DIR}λ ${COLOR_DEF}'
 # End of prompt definition
 
 
