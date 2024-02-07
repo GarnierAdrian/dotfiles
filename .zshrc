@@ -21,10 +21,10 @@ function parse_git_branch() {
 
 function parse_git_status() {
     COLOR_GIT=$'%F{blue}'
-    if [ "git status --porcelain --untracked-files=no" ]; then
-        COLOR_GIT=$'%F{red}'
-    else
+    if [ $(git status --porcelain --untracked-files=no | wc -l) -eq "0" ]; then
         COLOR_GIT=$'%F{green}'
+    else
+        COLOR_GIT=$'%F{red}'
     fi
 }
 
