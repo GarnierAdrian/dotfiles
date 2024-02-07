@@ -31,3 +31,10 @@ export PATH=$PATH:/usr/local/go/bin
 
 # Aliases
 alias yt-playlist='yt-dlp --embed-metadata --embed-subs --embed-thumbnail --merge-output-format mkv -o "%(playlist_title)s/%(playlist_index)s-%(playlist_title)s.%(ext)s" '
+
+
+alias ls='exa'
+alias ll='exa -ahl'
+alias tree='exa --tree'
+
+alias cat='bat -n'
