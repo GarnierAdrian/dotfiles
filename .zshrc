@@ -21,7 +21,7 @@ function parse_git_branch() {
 
 function parse_git_status() {
     COLOR_GIT=$'%F{blue}'
-    if [[ -n $(git status -s) ]]; then
+    if [[ 'git status --porcelain' ]]; then
         COLOR_GIT=$'%F{red}'
     else
         COLOR_GIT=$'%F{green}'
