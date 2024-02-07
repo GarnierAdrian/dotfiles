@@ -19,17 +19,12 @@ function parse_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1] /p'
 }
 
-function parse_git_status() {
-    git status --porcelain --untracked-files=no
-}
-
 COLOR_DEF=$'%f'
 COLOR_USR=$'%F{magenta}'
 COLOR_DIR=$'%F{yellow}'
-#COLOR_GIT=$'%F{blue}'
-
+COLOR_GIT=$'%F{blue}'
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ %f%(.$%F{red}.$%F{green})$(parse_git_branch)${COLOR_DIR}λ ${COLOR_DEF}'
+export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DIR}λ ${COLOR_DEF}'
 # End of prompt definition
 
 
