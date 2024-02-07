@@ -20,21 +20,16 @@ function parse_git_branch() {
 }
 
 function parse_git_status() {
-    COLOR_GIT=$'%F{blue}'
-    if [ $(git status --porcelain --untracked-files=no | wc -l) -eq "0" ]; then
-        COLOR_GIT=$'%F{green}'
-    else
-        COLOR_GIT=$'%F{red}'
-    fi
+    git status --porcelain --untracked-files=no
 }
 
 COLOR_DEF=$'%f'
 COLOR_USR=$'%F{magenta}'
 COLOR_DIR=$'%F{yellow}'
 #COLOR_GIT=$'%F{blue}'
-parse_git_status
+
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DIR}λ ${COLOR_DEF}'
+export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ %f%(.$%F{red}.$%F{green})$(parse_git_branch)${COLOR_DIR}λ ${COLOR_DEF}'
 # End of prompt definition
 
 
