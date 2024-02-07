@@ -15,13 +15,16 @@ compinit
 
 
 # Begninig of prompt definition
-autoload -Uz vcs_info
-precmd() { vcs_info }
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1] /p'
+}
 
-zstyle ':vcs_info:git:*' formats '%b '
-
+COLOR_DEF=$'%f'
+COLOR_USR=$'%F{blue}'
+COLOR_DIR=$'%F{green}'
+COLOR_GIT=$'%F{red}'
 setopt PROMPT_SUBST
-PROMPT='%F{green}%n@%m%f %F{blue}%1~%f %F{red}${vcs_info_msg_0_}%f$ '
+export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF}$ '
 # End of prompt definition
 
 
