@@ -38,3 +38,5 @@ alias ll='exa -ahl'
 alias tree='exa --tree'
 
 alias cat='bat -n'
+
+alias htop='btm -b'
