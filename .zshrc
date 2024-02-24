@@ -40,3 +40,5 @@ alias tree='exa --tree'
 alias cat='bat -n'
 
 alias htop='btm -b'
+
+alias vim='nvim'
