@@ -20,14 +20,14 @@ eval "$(starship init zsh)"
 
 
 # Imported from bash
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # Created by `pipx` on 2023-10-28 11:57:33
-export PATH="$PATH:/home/agarnier/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
-export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin
 
 # Aliases
 alias yt-playlist='yt-dlp --embed-metadata --embed-subs --embed-thumbnail --merge-output-format mkv -o "%(playlist_title)s/%(playlist_index)s-%(playlist_title)s.%(ext)s" '
@@ -42,3 +42,5 @@ alias cat='bat -n'
 alias htop='btm -b'
 
 alias vim='nvim'
+
+. "$HOME/.cargo/env"
