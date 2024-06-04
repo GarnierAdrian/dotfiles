@@ -1,37 +1,72 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=10000
-unsetopt beep
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Set the directory to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+    mkdir -p "$dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::debian
+zinit snippet OMZP::command-not-found
+
+
+# Load Completions
+autoload -U compinit && compinit
+
+zinit cdreplay -q
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Keybindings
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/agarnier/.zshrc'
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-
-
-# Begninig of prompt definition
-eval "$(starship init zsh)"
-# End of prompt definition
-
-
-# Imported from bash
-# export PYENV_ROOT="$HOME/.pyenv"
-# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
-
-# Created by `pipx` on 2023-10-28 11:57:33
-export PATH="$PATH:$HOME/.local/bin"
-
-# export PATH=$PATH:/usr/local/go/bin
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias yt-playlist='yt-dlp --embed-metadata --embed-subs --embed-thumbnail --merge-output-format mkv -o "%(playlist_title)s/%(playlist_index)s-%(playlist_title)s.%(ext)s" '
-
 
 alias ls='exa'
 alias ll='exa -ahl'
@@ -43,4 +78,22 @@ alias htop='btm -b'
 
 alias vim='nvim'
 
+# Shell integration
+source ~/.fzf.zsh
+eval "$(fzf --zsh)"
+
+# Software 
+# Rust
 . "$HOME/.cargo/env"
+
+# Node version manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Python
+export PATH="$PATH:$HOME/.local/bin"
+
+# Go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
