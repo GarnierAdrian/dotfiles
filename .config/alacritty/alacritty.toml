@@ -108,5 +108,3 @@ lines = 80
 x = 4
 y = 4
 
-[keyboard]
-bindings = [{ key = "F11", action = "ToggleFullscreen" }]
